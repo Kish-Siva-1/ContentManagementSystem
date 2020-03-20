@@ -18,10 +18,6 @@
                 </div> 
 
             </div>
-            <div >
-                <br>
-                <a href="categories/new">Add Category</a>
-            </div>
         </div>
     </div>
 </div>

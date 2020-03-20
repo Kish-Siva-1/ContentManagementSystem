@@ -3,7 +3,7 @@
 @section('content')
 <div class="card card-default">
     <div class="card-header">
-        {{isset($category) ? 'Edit Category' : 'Create Category' }}
+        {{isset($tags) ? 'Edit tags' : 'Create tags' }}
     </div>
     <div class="card-body">
         @if($errors->any())
@@ -17,18 +17,18 @@
             </ul>
         </div>
         @endif
-        <form action="{{isset($category) ? route('categories.update', $category -> id) : route('categories.store')}}" method="POST">
+        <form action="{{isset($tags) ? route('tags.update', $tags -> id) : route('tags.store')}}" method="POST">
             @csrf
-            @if(isset($category))
+            @if(isset($tags))
             @method('PUT')
             @endif
             <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" id="name" class="form-control" name="name" value="{{ isset($category) ? $category->name : '' }}">
+                <input type="text" id="name" class="form-control" name="name" value="{{ isset($tags) ? $tags->name : '' }}">
             </div>
             <div class="form-group">
                 <button class="btn btn-success">
-                    {{isset($category) ? 'Update Category' : 'Add Category' }}
+                    {{isset($tags) ? 'Update tags' : 'Add tags' }}
                 </button>
             </div>
         </form>
