@@ -65,7 +65,7 @@ class TagsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tag $Tag)
+    public function edit(Tag $tag)
     {   
         return view('tags.create') -> with('tag', $tag);
     }
@@ -77,7 +77,7 @@ class TagsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateTagsRequest $request, Tag $Tag)
+    public function update(UpdateTagsRequest $request, Tag $tag)
     {
         $tag -> update([
             'name' => $request->name
@@ -97,6 +97,12 @@ class TagsController extends Controller
 
     public function destroy(Tag $tag)
     {
+        if($tag -> posts -> count()>0){
+            session()->flash('error', 'Tag cannot be deleted because it is associated to some posts.');
+
+            return redirect()->back();
+        }
+        
         $tag->delete();
 
         session()->flash('success', 'Tag deleted successfully.');

@@ -18,9 +18,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <style>
-        .btn-info{
+        .btn-info {
             color: #fff;
-        } 
+        }
     </style>
 
     @yield('css')
@@ -64,6 +64,10 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a href="{{route('users.edit-profile')}}" class="dropdown-item">
+                                    My Profile
+                                </a>
+
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
@@ -84,19 +88,26 @@
             @auth
             <div class="container">
                 @if(session() -> has('success'))
-                    <div class="alert alert-success">
-                        {{session()->get('success')}}
-                    </div>
+                <div class="alert alert-success">
+                    {{session()->get('success')}}
+                </div>
                 @endif
                 @if(session() -> has('error'))
-                    <div class="alert alert-danger">
-                        {{session()->get('error')}}
-                    </div>
+                <div class="alert alert-danger">
+                    {{session()->get('error')}}
+                </div>
                 @endif
                 <div class="row">
 
                     <div class="col-md-4">
                         <ul class="list-group">
+                            @if(auth() -> user() -> isAdmin())
+                            <li class="list-group-item">
+                                <a href="{{route('users.index')}}">
+                                    Users
+                                </a>
+                            </li>
+                            @endif
                             <li class="list-group-item">
                                 <a href="{{route('posts.index')}}">Posts</a>
                             </li>
